@@ -4,9 +4,5 @@ server:
 spring:
   data:
     mongodb:
+      uri: mongodb://rootuser:rootpass@localhost/OisacDb?authSource=admin
       authentication-database: admin
-      username: username
-      password: password
-      database: mongodb
-      port: 27017
-      host: localhost

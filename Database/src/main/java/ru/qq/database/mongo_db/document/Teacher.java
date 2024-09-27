@@ -16,10 +16,8 @@ import java.util.List;
 @Builder
 @EqualsAndHashCode
 public class Teacher {
-    @Id
-    private String id;
 
-    @Field("Name")
+    @Id
     private String nameOfTeacher;
 
     @Field("Task-catalogs")

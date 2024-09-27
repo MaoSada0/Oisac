@@ -8,6 +8,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import ru.qq.common.payload.GetTeacherPayload;
 import ru.qq.common.payload.TaskCatalogPayload;
 import ru.qq.common.payload.TaskPayload;
 import ru.qq.node.service.MainService;
@@ -46,5 +47,15 @@ public class MainServiceImpl implements MainService {
         TaskCatalogPayload taskCatalogPayload = new TaskCatalogPayload(name, tasksAndAnswers);
 
         return databaseWebClient.saveTasks(taskCatalogPayload, idOfTeacher);
+    }
+
+    @Override
+    public boolean createTeacher(GetTeacherPayload teacherPayload) {
+        return databaseWebClient.createTeacher(teacherPayload);
+    }
+
+    @Override
+    public boolean existsTeacher(String username) {
+        return databaseWebClient.existsTeacher(username);
     }
 }

@@ -1,6 +1,7 @@
 package ru.qq.node.controller.Teacher;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -9,7 +10,7 @@ import ru.qq.node.service.MainService;
 @RestController
 @RequestMapping("api/v1/teacher/{id}")
 @RequiredArgsConstructor
-public class TeacherController {
+public class TeacherIdController {
 
     private final MainService mainService;
 
@@ -19,7 +20,6 @@ public class TeacherController {
                                         @RequestParam("name") String name){
         boolean isOk = mainService.processExcel(file, name, id);
 
-        if(isOk) return ResponseEntity.ok().build();
-        return ResponseEntity.badRequest().build();
+        return new ResponseEntity<>(isOk, HttpStatus.OK);
     }
 }

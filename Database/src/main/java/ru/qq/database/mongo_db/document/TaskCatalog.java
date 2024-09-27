@@ -1,6 +1,5 @@
 package ru.qq.database.mongo_db.document;
 
-import jakarta.persistence.UniqueConstraint;
 import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -13,7 +12,7 @@ import java.util.List;
 @Setter
 @EqualsAndHashCode
 @Builder
-@RequiredArgsConstructor
+@Data
 public class TaskCatalog {
 
     @Field("Name")

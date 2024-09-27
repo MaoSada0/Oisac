@@ -8,8 +8,8 @@ import org.springframework.data.mongodb.core.mapping.Field;
 @Getter
 @Setter
 @EqualsAndHashCode
-@RequiredArgsConstructor
 @Builder
+@Data
 public class Task {
     @Field("Description")
     private String description;

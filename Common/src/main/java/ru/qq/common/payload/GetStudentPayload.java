@@ -1,3 +1,3 @@
-package ru.qq.node.payload;
+package ru.qq.common.payload;
 
 public record GetStudentPayload(){}

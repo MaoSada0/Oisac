@@ -3,4 +3,4 @@ server:
 
 project:
   database:
-    api: ll
+    api: http://localhost:8090/db/mongo/api/v1

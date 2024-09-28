@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 import ru.qq.common.payload.TeacherPayload;
 import ru.qq.common.payload.TaskCatalogPayload;
 import ru.qq.common.payload.TaskPayload;
+import ru.qq.node.exception.IncorrectExcelFileException;
 import ru.qq.node.service.MainService;
 import ru.qq.node.webclient.DatabaseWebClient;
 
@@ -28,16 +29,16 @@ public class MainServiceImpl implements MainService {
 
         List<TaskPayload> tasksAndAnswers = new ArrayList<>();
         try (Workbook workbook = new XSSFWorkbook(excelFile.getInputStream())) {
-
             Sheet sheet = workbook.getSheetAt(0);
 
             for (Row row : sheet) {
-                // TODO: Добавить проверку
+                if(row.getPhysicalNumberOfCells() > 2){
+                    throw new IncorrectExcelFileException("Incorrect excel file, must be only 2 columns");
+                }
                 TaskPayload taskPayload = new TaskPayload(row.getCell(0).toString(),
                         row.getCell(1).toString());
                 tasksAndAnswers.add(taskPayload);
             }
-
         } catch (IOException e) {
             e.printStackTrace();
             return false;

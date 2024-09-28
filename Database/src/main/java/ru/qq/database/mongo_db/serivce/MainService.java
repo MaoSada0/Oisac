@@ -1,13 +1,15 @@
 package ru.qq.database.mongo_db.serivce;
 
-import ru.qq.common.payload.GetTeacherPayload;
+import org.springframework.http.ResponseEntity;
+import ru.qq.common.payload.TeacherPayload;
 import ru.qq.common.payload.TaskCatalogPayload;
 
 public interface MainService {
-    boolean saveTaskCatalog(String nameOfTeacher, TaskCatalogPayload catalogPayload);
+    void saveTaskCatalog(String nameOfTeacher, TaskCatalogPayload catalogPayload);
 
-    boolean existsTeacher(String id);
+    boolean existsTeacher(String nameOfTeacher);
 
-    boolean createTeacher(GetTeacherPayload teacherPayload);
+    void createTeacher(TeacherPayload teacherPayload);
 
+    String[] getNamesOfTaskCatalogs(String nameOfTeacher);
 }

@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.qq.common.payload.GetTeacherPayload;
+import ru.qq.common.payload.TeacherPayload;
 import ru.qq.node.service.MainService;
 
 @RestController
@@ -22,7 +22,7 @@ public class TeachersController {
     }
 
     @PostMapping("create")
-    public ResponseEntity<?> createTeacher(@RequestBody GetTeacherPayload teacherPayload){
+    public ResponseEntity<?> createTeacher(@RequestBody TeacherPayload teacherPayload){
 
         boolean isOk = mainService.createTeacher(teacherPayload);
 

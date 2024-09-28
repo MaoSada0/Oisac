@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.qq.common.payload.GetStudentPayload;
+import ru.qq.common.payload.StudentPayload;
 
 @RestController
 @RequestMapping("api/v1/student")
@@ -18,7 +18,7 @@ public class StudentsController {
     }
 
     @PostMapping("create")
-    public ResponseEntity<?> createStudent(@RequestBody GetStudentPayload studentPayload){
+    public ResponseEntity<?> createStudent(@RequestBody StudentPayload studentPayload){
 
         return ResponseEntity.ok().build();
     }

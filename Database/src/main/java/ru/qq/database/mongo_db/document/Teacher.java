@@ -1,9 +1,6 @@
 package ru.qq.database.mongo_db.document;
 
-import lombok.Builder;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
@@ -15,6 +12,7 @@ import java.util.List;
 @Setter
 @Builder
 @EqualsAndHashCode
+@Data
 public class Teacher {
 
     @Id

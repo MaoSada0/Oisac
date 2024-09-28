@@ -1,14 +1,13 @@
 package ru.qq.node.service.impl;
 
 import lombok.RequiredArgsConstructor;
-import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import ru.qq.common.payload.GetTeacherPayload;
+import ru.qq.common.payload.TeacherPayload;
 import ru.qq.common.payload.TaskCatalogPayload;
 import ru.qq.common.payload.TaskPayload;
 import ru.qq.node.service.MainService;
@@ -50,12 +49,17 @@ public class MainServiceImpl implements MainService {
     }
 
     @Override
-    public boolean createTeacher(GetTeacherPayload teacherPayload) {
+    public boolean createTeacher(TeacherPayload teacherPayload) {
         return databaseWebClient.createTeacher(teacherPayload);
     }
 
     @Override
     public boolean existsTeacher(String username) {
         return databaseWebClient.existsTeacher(username);
+    }
+
+    @Override
+    public String[] getNamesOfTasks(String id) {
+        return databaseWebClient.getNamesOfTasks(id);
     }
 }

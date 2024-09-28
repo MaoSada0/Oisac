@@ -17,9 +17,20 @@ public class TeacherIdController {
     @PostMapping("uploadTasks")
     public ResponseEntity<?> uploadTasks(@PathVariable("id") String id,
                                         @RequestBody TaskCatalogPayload catalogPayload){
-        boolean isOk = mainService.saveTaskCatalog(id, catalogPayload);
+        mainService.saveTaskCatalog(id, catalogPayload);
 
-        return new ResponseEntity<>(isOk, HttpStatus.OK);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body("Success save: {" + id + ", " + catalogPayload.name() + "}");
+    }
+
+    @GetMapping("getNamesOfTasks")
+    public ResponseEntity<String[]> getAllTaskCatalogNames(@PathVariable("id") String id){
+        String[] returnAns = mainService.getNamesOfTaskCatalogs(id);
+
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(returnAns);
     }
 
 }

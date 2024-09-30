@@ -4,9 +4,9 @@ services:
     image: mongo
     container_name: mongo
     ports:
-      - 27017:27017
+      - "27017:27017"
     volumes:
-      - data:/data
+      - mongo_data:/data/db
     environment:
       - MONGO_INITDB_ROOT_USERNAME=rootuser
       - MONGO_INITDB_ROOT_PASSWORD=rootpass
@@ -16,15 +16,32 @@ services:
     container_name: mongo-express
     restart: always
     ports:
-      - 8081:8081
+      - "8081:8081"
     environment:
       - ME_CONFIG_MONGODB_ADMINUSERNAME=rootuser
       - ME_CONFIG_MONGODB_ADMINPASSWORD=rootpass
       - ME_CONFIG_MONGODB_SERVER=mongo
 
+  postgres:
+    image: postgres:16.4
+    container_name: postgres_db
+    hostname: postgres_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: rootuser
+      POSTGRES_PASSWORD: pass
+      POSTGRES_DB: oisacdb
+    ports:
+      - "32768:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+
 volumes:
-  data: {}
+  mongo_data: {}
+  postgres_data:
+    driver: local
 
 networks:
   default:
-    name: mongo_network
+    name: network

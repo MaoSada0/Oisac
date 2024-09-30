@@ -6,3 +6,19 @@ spring:
     mongodb:
       uri: mongodb://rootuser:rootpass@localhost/OisacDb?authSource=admin
       authentication-database: admin
+
+  datasource:
+    url: jdbc:postgresql://localhost:32768/oisacdb
+    username: rootuser
+    password: pass
+    driver-class-name: org.postgresql.Driver
+
+  flyway:
+    schemas:
+      - oisac
+      - public
+    enabled: true
+    locations: classpath:db/migration
+
+
+

@@ -1,0 +1,22 @@
+package ru.qq.database.postgres_db.entity;
+
+import jakarta.persistence.*;
+import lombok.*;
+
+@Getter
+@Setter
+@EqualsAndHashCode
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity
+@Table(name = "t_task_catalogs", schema = "oisac")
+public class TaskCatalog {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "c_catalog_id")
+    private Long catalogId;
+
+    @Column(name = "c_catalog_name", nullable = false)
+    private String catalogName;
+}

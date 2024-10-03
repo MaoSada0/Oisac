@@ -20,9 +20,9 @@ public class Task {
 
     @ManyToOne
     @JoinColumn(name = "c_catalog_id", nullable = false)
-    private TaskCatalog catalog;
+    private TaskCatalog taskCatalog;
 
-    @Column(nullable = false, name = "c_description")
+    @Column(nullable = false, name = "c_description", unique = true)
     private String description;
 
     @Column(nullable = false, name = "c_answer")

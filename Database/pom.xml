@@ -109,8 +109,6 @@
             <artifactId>flyway-database-postgresql</artifactId>
         </dependency>
 
-
-
     </dependencies>
 
     <build>

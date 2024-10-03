@@ -3,6 +3,8 @@ package ru.qq.database.postgres_db.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.Set;
+
 @Getter
 @Setter
 @EqualsAndHashCode
@@ -18,6 +20,18 @@ public class Student {
     @Column(name = "c_student_id")
     private Long studentId;
 
-    @Column(name = "c_student_name", nullable = false)
-    private String studentName;
+    @Column(name = "c_student_nickname", nullable = false, unique = true)
+    private String studentNickname;
+
+    @Column(name = "c_student_fullname", nullable = false)
+    private String studentFullname;
+
+
+    @ManyToMany
+    @JoinTable(
+            name = "t_student_catalog",
+            joinColumns = @JoinColumn(name = "c_student_id"),
+            inverseJoinColumns = @JoinColumn(name = "c_catalog_id")
+    )
+    private Set<TaskCatalog> catalogs;
 }

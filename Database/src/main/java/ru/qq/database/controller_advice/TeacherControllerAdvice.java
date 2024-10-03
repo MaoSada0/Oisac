@@ -1,13 +1,13 @@
-package ru.qq.database.mongo_db.controller_advice;
+package ru.qq.database.controller_advice;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
-import ru.qq.database.mongo_db.exception.TaskCatalogWithNameAlreadyExistsException;
-import ru.qq.database.mongo_db.exception.TeacherAlreadyExistsException;
-import ru.qq.database.mongo_db.exception.TeacherNotFoundException;
+import ru.qq.database.exception.TaskCatalogWithNameAlreadyExistsException;
+import ru.qq.database.exception.TeacherAlreadyExistsException;
+import ru.qq.database.exception.TeacherNotFoundException;
 
 @ControllerAdvice
 public class TeacherControllerAdvice {

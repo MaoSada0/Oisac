@@ -1,4 +1,4 @@
-package ru.qq.database.mongo_db.serivce.impl;
+package ru.qq.database.serivce.impl;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -8,11 +8,11 @@ import ru.qq.common.payload.TaskCatalogPayload;
 import ru.qq.database.mongo_db.document.Task;
 import ru.qq.database.mongo_db.document.TaskCatalog;
 import ru.qq.database.mongo_db.document.Teacher;
-import ru.qq.database.mongo_db.exception.TaskCatalogWithNameAlreadyExistsException;
-import ru.qq.database.mongo_db.exception.TeacherAlreadyExistsException;
-import ru.qq.database.mongo_db.exception.TeacherNotFoundException;
+import ru.qq.database.exception.TaskCatalogWithNameAlreadyExistsException;
+import ru.qq.database.exception.TeacherAlreadyExistsException;
+import ru.qq.database.exception.TeacherNotFoundException;
 import ru.qq.database.mongo_db.repository.MongoDbRepository;
-import ru.qq.database.mongo_db.serivce.MainService;
+import ru.qq.database.serivce.MainService;
 
 import java.util.ArrayList;
 import java.util.List;

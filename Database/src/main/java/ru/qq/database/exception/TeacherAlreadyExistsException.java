@@ -1,4 +1,4 @@
-package ru.qq.database.mongo_db.exception;
+package ru.qq.database.exception;
 
 public class TeacherAlreadyExistsException extends RuntimeException {
     public TeacherAlreadyExistsException(String message) {

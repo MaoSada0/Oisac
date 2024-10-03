@@ -1,11 +1,11 @@
-package ru.qq.database.mongo_db.controller;
+package ru.qq.database.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.qq.common.payload.TeacherPayload;
-import ru.qq.database.mongo_db.serivce.MainService;
+import ru.qq.database.serivce.MainService;
 
 @RestController
 @RequestMapping("db/mongo/api/v1/")

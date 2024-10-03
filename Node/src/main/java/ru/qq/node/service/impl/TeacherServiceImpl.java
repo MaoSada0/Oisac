@@ -11,7 +11,7 @@ import ru.qq.common.payload.TeacherPayload;
 import ru.qq.common.payload.TaskCatalogPayload;
 import ru.qq.common.payload.TaskPayload;
 import ru.qq.node.exception.IncorrectExcelFileException;
-import ru.qq.node.service.MainService;
+import ru.qq.node.service.TeacherService;
 import ru.qq.node.webclient.DatabaseWebClient;
 
 import java.io.IOException;
@@ -20,7 +20,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class MainServiceImpl implements MainService {
+public class TeacherServiceImpl implements TeacherService {
 
     private final DatabaseWebClient databaseWebClient;
 

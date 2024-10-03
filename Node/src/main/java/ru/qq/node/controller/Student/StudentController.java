@@ -11,12 +11,6 @@ import ru.qq.common.payload.StudentPayload;
 @RequiredArgsConstructor
 public class StudentController {
 
-    @GetMapping("exists")
-    public ResponseEntity<Boolean> existsStudent(@RequestParam("username") String username){
-
-        return new ResponseEntity<>(true, HttpStatus.OK);
-    }
-
     @PostMapping("create")
     public ResponseEntity<?> createStudent(@RequestBody StudentPayload studentPayload){
 

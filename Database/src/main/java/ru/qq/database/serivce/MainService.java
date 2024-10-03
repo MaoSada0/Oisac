@@ -1,4 +1,4 @@
-package ru.qq.database.mongo_db.serivce;
+package ru.qq.database.serivce;
 
 import org.springframework.http.ResponseEntity;
 import ru.qq.common.payload.TeacherPayload;

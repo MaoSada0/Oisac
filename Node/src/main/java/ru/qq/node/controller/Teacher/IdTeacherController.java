@@ -5,21 +5,26 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import ru.qq.node.service.MainService;
+import ru.qq.node.service.TeacherService;
 
 
 @RestController
-@RequestMapping("api/v1/teacher/{teacherName}")
+@RequestMapping("api/v1/teacher/{nickname}")
 @RequiredArgsConstructor
 public class IdTeacherController {
 
-    private final MainService mainService;
+    private final TeacherService teacherService;
+
+    @ModelAttribute("teacherNickname")
+    public String getTeacherNickname(@PathVariable("nickname") String teacherNickname) {
+        return teacherNickname;
+    }
 
     @PostMapping("upload")
-    public ResponseEntity<?> uploadTask(@PathVariable("teacherName") String username,
+    public ResponseEntity<?> uploadTask(@ModelAttribute("teacherNickname") String username,
                                         @RequestParam("file") MultipartFile file,
                                         @RequestParam("name") String name){
-        boolean isOk = mainService.processExcel(file, name, username);
+        boolean isOk = teacherService.processExcel(file, name, username);
 
         if (isOk) {
             return new ResponseEntity<>("Task uploaded successfully", HttpStatus.CREATED);
@@ -29,8 +34,8 @@ public class IdTeacherController {
     }
 
     @GetMapping
-    public ResponseEntity<?> existsTeacher(@PathVariable("teacherName") String username){
-        boolean exists = mainService.existsTeacher(username);
+    public ResponseEntity<?> existsTeacher(@ModelAttribute("teacherNickname") String username){
+        boolean exists = teacherService.existsTeacher(username);
 
         if (exists) {
             return ResponseEntity.ok("Teacher found: " + username);
@@ -38,4 +43,6 @@ public class IdTeacherController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Teacher not found: " + username);
         }
     }
+
+
 }

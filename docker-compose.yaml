@@ -29,7 +29,7 @@ services:
     restart: unless-stopped
     environment:
       POSTGRES_USER: rootuser
-      POSTGRES_PASSWORD: pass
+      POSTGRES_PASSWORD:
       POSTGRES_DB: oisacdb
     ports:
       - "32768:5432"

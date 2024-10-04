@@ -1,6 +1,7 @@
 package ru.qq.node.service.impl;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -12,7 +13,7 @@ import ru.qq.common.payload.TaskCatalogPayload;
 import ru.qq.common.payload.TaskPayload;
 import ru.qq.node.exception.IncorrectExcelFileException;
 import ru.qq.node.service.TeacherService;
-import ru.qq.node.webclient.DatabaseWebClient;
+import ru.qq.node.webclient.TeacherDatabaseWebClient;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -20,9 +21,10 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Log4j
 public class TeacherServiceImpl implements TeacherService {
 
-    private final DatabaseWebClient databaseWebClient;
+    private final TeacherDatabaseWebClient teacherDatabaseWebClient;
 
     @Override
     public boolean processExcel(MultipartFile excelFile, String name, String idOfTeacher) {
@@ -46,21 +48,25 @@ public class TeacherServiceImpl implements TeacherService {
 
         TaskCatalogPayload taskCatalogPayload = new TaskCatalogPayload(name, tasksAndAnswers);
 
-        return databaseWebClient.saveTasks(taskCatalogPayload, idOfTeacher);
+        return teacherDatabaseWebClient.saveTasks(taskCatalogPayload, idOfTeacher);
     }
 
     @Override
     public boolean createTeacher(TeacherPayload teacherPayload) {
-        return databaseWebClient.createTeacher(teacherPayload);
+        return teacherDatabaseWebClient.createTeacher(teacherPayload);
     }
 
     @Override
     public boolean existsTeacher(String username) {
-        return databaseWebClient.existsTeacher(username);
+        boolean b = teacherDatabaseWebClient.existsTeacher(username);
+
+        log.debug(b);
+
+        return b;
     }
 
     @Override
     public String[] getNamesOfTasks(String id) {
-        return databaseWebClient.getNamesOfTasks(id);
+        return teacherDatabaseWebClient.getNamesOfTasks(id);
     }
 }

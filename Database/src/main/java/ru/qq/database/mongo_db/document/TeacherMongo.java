@@ -13,11 +13,11 @@ import java.util.List;
 @Builder
 @EqualsAndHashCode
 @Data
-public class Teacher {
+public class TeacherMongo {
 
     @Id
-    private String nameOfTeacher;
+    private String nicknameOfTeacher;
 
     @Field("Task-catalogs")
-    private List<TaskCatalog> taskCatalogs;
+    private List<TaskCatalogMongo> taskCatalogs;
 }

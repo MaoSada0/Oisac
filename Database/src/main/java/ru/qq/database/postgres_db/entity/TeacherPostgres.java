@@ -7,13 +7,13 @@ import java.util.Set;
 
 @Getter
 @Setter
-@EqualsAndHashCode
+@EqualsAndHashCode(exclude = "students")
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Table(name = "t_teachers", schema = "oisac")
-public class Teacher {
+public class TeacherPostgres {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,9 +29,9 @@ public class Teacher {
 
     @ManyToMany
     @JoinTable(
-            name = "t_teacher_catalog",
+            name = "t_student_teacher",
             joinColumns = @JoinColumn(name = "c_teacher_id"),
-            inverseJoinColumns = @JoinColumn(name = "c_catalog_id")
+            inverseJoinColumns = @JoinColumn(name = "c_student_id")
     )
-    private Set<TaskCatalog> catalogs;
+    private Set<StudentPostgres> students;
 }

@@ -5,9 +5,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
-import ru.qq.database.exception.TaskCatalogWithNameAlreadyExistsException;
-import ru.qq.database.exception.TeacherAlreadyExistsException;
-import ru.qq.database.exception.TeacherNotFoundException;
+import ru.qq.database.exception.teacher.TaskCatalogWithNameAlreadyExistsException;
+import ru.qq.database.exception.teacher.TeacherAlreadyExistsException;
+import ru.qq.database.exception.teacher.TeacherNotFoundException;
 
 @ControllerAdvice
 public class TeacherControllerAdvice {

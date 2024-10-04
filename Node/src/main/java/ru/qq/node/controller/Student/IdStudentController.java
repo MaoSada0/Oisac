@@ -14,20 +14,21 @@ public class IdStudentController {
     private final StudentService studentService;
 
 
-    @ModelAttribute("studentNickname")
+    @ModelAttribute("nickname")
     public String getStudentNickname(@PathVariable("nickname") String studentNickname) {
         return studentNickname;
     }
 
     @GetMapping
-    public ResponseEntity<?> existsStudent(@ModelAttribute("studentNickname") String nickname){
+    public ResponseEntity<?> existsStudent(@ModelAttribute("nickname") String nickname){
         boolean exists = studentService.existsStudent(nickname);
 
-        if (exists) {
-            return ResponseEntity.ok("Student found: " + nickname);
-        } else {
+        if (!exists) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Student not found: " + nickname);
         }
+
+        return ResponseEntity.ok("Student found: " + nickname);
+
     }
 
 }

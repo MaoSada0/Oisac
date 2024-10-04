@@ -3,7 +3,8 @@ server:
 
 project:
   database:
-    api: http://localhost:8090/db/mongo/api/v1
+    api: http://localhost:8090/db/api/v1
+
 
 spring:
   mvc:

@@ -12,7 +12,12 @@ spring:
     username: rootuser
     password: pass
     driver-class-name: org.postgresql.Driver
-
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        default_schema: oisac
   flyway:
     schemas:
       - oisac

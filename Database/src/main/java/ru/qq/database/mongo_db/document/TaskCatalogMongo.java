@@ -4,16 +4,19 @@ import lombok.*;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+import java.util.List;
+
 @Document
 @Getter
 @Setter
 @EqualsAndHashCode
 @Builder
 @Data
-public class Task {
-    @Field("Description")
-    private String description;
+public class TaskCatalogMongo {
 
-    @Field("Answer")
-    private String answer;
+    @Field("Name")
+    private String name;
+
+    @Field("Tasks")
+    private List<TaskMongo> tasks;
 }

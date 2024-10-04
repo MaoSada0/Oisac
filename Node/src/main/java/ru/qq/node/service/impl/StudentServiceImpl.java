@@ -1,12 +1,24 @@
 package ru.qq.node.service.impl;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import ru.qq.common.payload.StudentPayload;
 import ru.qq.node.service.StudentService;
+import ru.qq.node.webclient.StudentDatabaseWebClient;
 
 @Service
+@RequiredArgsConstructor
 public class StudentServiceImpl implements StudentService {
+
+    private final StudentDatabaseWebClient studentDatabaseWebClient;
+
     @Override
     public boolean existsStudent(String nickname) {
-        return false;
+        return studentDatabaseWebClient.existsStudent(nickname);
+    }
+
+    @Override
+    public boolean createStudent(StudentPayload studentPayload) {
+        return studentDatabaseWebClient.createStudent(studentPayload);
     }
 }

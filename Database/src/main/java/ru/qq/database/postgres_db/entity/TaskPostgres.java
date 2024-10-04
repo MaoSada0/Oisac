@@ -11,7 +11,7 @@ import lombok.*;
 @AllArgsConstructor
 @Entity
 @Table(name = "t_tasks", schema = "oisac")
-public class Task {
+public class TaskPostgres {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,7 +20,7 @@ public class Task {
 
     @ManyToOne
     @JoinColumn(name = "c_catalog_id", nullable = false)
-    private TaskCatalog taskCatalog;
+    private TaskCatalogPostgres taskCatalogPostgres;
 
     @Column(nullable = false, name = "c_description", unique = true)
     private String description;

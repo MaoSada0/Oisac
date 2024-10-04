@@ -11,18 +11,18 @@ import ru.qq.common.payload.TeacherPayload;
 import ru.qq.common.payload.TaskCatalogPayload;
 import ru.qq.node.exception.NotFoundFromDbException;
 import ru.qq.node.exception.ConflictFromDbException;
-import ru.qq.node.webclient.DatabaseWebClient;
+import ru.qq.node.webclient.TeacherDatabaseWebClient;
 
 @Component
 @RequiredArgsConstructor
-public class DatabaseWebClientImpl implements DatabaseWebClient {
+public class TeacherDatabaseWebClientImpl implements TeacherDatabaseWebClient {
 
     private final WebClient webClient;
 
     @Override
     public boolean saveTasks(TaskCatalogPayload taskCatalogPayload, String nameOfTeacher) {
         return Boolean.TRUE.equals(webClient.post()
-                .uri("/{id}/uploadTasks", nameOfTeacher)
+                .uri("/teacher/{nickname}/upload", nameOfTeacher)
                 .bodyValue(taskCatalogPayload)
                 .retrieve()
                 .onStatus(HttpStatusCode::is4xxClientError, clientResponse -> clientResponse.bodyToMono(String.class)
@@ -35,11 +35,11 @@ public class DatabaseWebClientImpl implements DatabaseWebClient {
     @Override
     public boolean createTeacher(TeacherPayload teacherPayload) {
         return Boolean.TRUE.equals(webClient.post()
-                .uri("/createTeacher")
+                .uri("/teacher")
                 .bodyValue(teacherPayload)
                 .retrieve()
                 .onStatus(HttpStatusCode::is4xxClientError, clientResponse -> clientResponse.bodyToMono(String.class)
-                        .flatMap(body -> handleClientResponse(clientResponse, body, teacherPayload.name())))
+                        .flatMap(body -> handleClientResponse(clientResponse, body, teacherPayload.nickname())))
                 .toBodilessEntity()
                 .map(response -> response.getStatusCode().is2xxSuccessful())
                 .block());
@@ -47,11 +47,11 @@ public class DatabaseWebClientImpl implements DatabaseWebClient {
 
     @Override
     public boolean existsTeacher(String nameOfTeacher) {
+
+
+
         return Boolean.TRUE.equals(webClient.get()
-                .uri(uriBuilder -> uriBuilder
-                                .path("/exists")
-                                .queryParam("id", nameOfTeacher)
-                                .build())
+                .uri("/teacher/{nameOfTeacher}", nameOfTeacher)
                 .retrieve()
                 .onStatus(HttpStatusCode::is4xxClientError, clientResponse -> clientResponse.bodyToMono(String.class)
                         .flatMap(body -> handleClientResponse(clientResponse, body, nameOfTeacher)))
@@ -63,7 +63,7 @@ public class DatabaseWebClientImpl implements DatabaseWebClient {
     @Override
     public String[] getNamesOfTasks(String nameOfTeacher) {
         return webClient.get()
-                .uri("/{id}/getNamesOfTasks", nameOfTeacher)
+                .uri("/teacher/{nameOfTeacher}/task/names", nameOfTeacher)
                 .retrieve()
                 .onStatus(HttpStatusCode::is4xxClientError, clientResponse -> clientResponse.bodyToMono(String.class)
                         .flatMap(body -> handleClientResponse(clientResponse, body, nameOfTeacher)))
@@ -71,20 +71,20 @@ public class DatabaseWebClientImpl implements DatabaseWebClient {
                 .block();
     }
 
-    private Mono<Throwable> handleClientResponse(ClientResponse clientResponse, String body, String nameOfTeacher) {
+    private Mono<Throwable> handleClientResponse(ClientResponse clientResponse, String body, String nickname) {
         if (clientResponse.statusCode() == HttpStatus.NOT_FOUND) {
-            return Mono.error(new NotFoundFromDbException(getTextForErr(body, nameOfTeacher)));
+            return Mono.error(new NotFoundFromDbException(getTextForErr(body, nickname)));
         }
 
         if (clientResponse.statusCode() == HttpStatus.CONFLICT) {
-            return Mono.error(new ConflictFromDbException(getTextForErr(body, nameOfTeacher)));
+            return Mono.error(new ConflictFromDbException(getTextForErr(body, nickname)));
         }
 
         return clientResponse.createException().flatMap(Mono::error);
     }
 
-    private String getTextForErr(String body, String nameOfTeacher){
-        return "Err with: " + nameOfTeacher + ". Response body{" + body + "}";
+    private String getTextForErr(String body, String nickname){
+        return "Err with: " + nickname + ". Response body{" + body + "}";
     }
 
 

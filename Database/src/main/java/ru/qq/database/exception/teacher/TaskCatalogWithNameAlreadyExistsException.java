@@ -1,4 +1,4 @@
-package ru.qq.database.exception;
+package ru.qq.database.exception.teacher;
 
 public class TaskCatalogWithNameAlreadyExistsException extends RuntimeException {
     public TaskCatalogWithNameAlreadyExistsException(String message) {

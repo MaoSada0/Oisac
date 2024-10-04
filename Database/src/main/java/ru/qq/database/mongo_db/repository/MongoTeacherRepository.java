@@ -4,17 +4,17 @@ import org.springframework.data.mongodb.repository.Aggregation;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 import org.springframework.stereotype.Repository;
-import ru.qq.database.mongo_db.document.Teacher;
+import ru.qq.database.mongo_db.document.TeacherMongo;
 
 import java.util.List;
 
 @Repository
-public interface MongoDbRepository extends MongoRepository<Teacher, String> {
+public interface MongoTeacherRepository extends MongoRepository<TeacherMongo, String> {
 
     @Aggregation(pipeline = {
-            "{ '$match': { '_id': ?0 } }",                        // Находим документ по _id
-            "{ '$unwind': '$Task-catalogs' }",                    // Разворачиваем массив Task-catalogs
-            "{ '$project': { 'name': '$Task-catalogs.Name' } }"   // Извлекаем поле Name
+            "{ '$match': { '_id': ?0 } }",
+            "{ '$unwind': '$Task-catalogs' }",
+            "{ '$project': { 'name': '$Task-catalogs.Name' } }"
     })
     List<String> findTaskCatalogNamesByTeacherId(String nameOfTeacher);
 

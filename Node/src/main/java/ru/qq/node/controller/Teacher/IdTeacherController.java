@@ -15,33 +15,33 @@ public class IdTeacherController {
 
     private final TeacherService teacherService;
 
-    @ModelAttribute("teacherNickname")
+    @ModelAttribute("nickname")
     public String getTeacherNickname(@PathVariable("nickname") String teacherNickname) {
         return teacherNickname;
     }
 
     @PostMapping("upload")
-    public ResponseEntity<?> uploadTask(@ModelAttribute("teacherNickname") String username,
+    public ResponseEntity<?> uploadTask(@ModelAttribute("nickname") String nickname,
                                         @RequestParam("file") MultipartFile file,
                                         @RequestParam("name") String name){
-        boolean isOk = teacherService.processExcel(file, name, username);
+        boolean isOk = teacherService.processExcel(file, name, nickname);
 
-        if (isOk) {
-            return new ResponseEntity<>("Task uploaded successfully", HttpStatus.CREATED);
-        } else {
+        if (!isOk) {
             return new ResponseEntity<>("Failed to upload task", HttpStatus.BAD_REQUEST);
         }
+
+        return new ResponseEntity<>("Task uploaded successfully", HttpStatus.CREATED);
     }
 
     @GetMapping
-    public ResponseEntity<?> existsTeacher(@ModelAttribute("teacherNickname") String username){
-        boolean exists = teacherService.existsTeacher(username);
+    public ResponseEntity<?> existsTeacher(@ModelAttribute("nickname") String nickname){
+        boolean exists = teacherService.existsTeacher(nickname);
 
-        if (exists) {
-            return ResponseEntity.ok("Teacher found: " + username);
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Teacher not found: " + username);
+        if (!exists) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Teacher not found: " + nickname);
         }
+
+        return ResponseEntity.ok("Teacher found: " + nickname);
     }
 
 

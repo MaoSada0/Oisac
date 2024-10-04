@@ -5,16 +5,26 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.qq.common.payload.StudentPayload;
+import ru.qq.node.service.StudentService;
 
 @RestController
 @RequestMapping("api/v1/student")
 @RequiredArgsConstructor
 public class StudentController {
 
-    @PostMapping("create")
+    private final StudentService studentService;
+
+    @PostMapping
     public ResponseEntity<?> createStudent(@RequestBody StudentPayload studentPayload){
 
-        return ResponseEntity.ok().build();
+        boolean isCreated = studentService.createStudent(studentPayload);
+
+        if (!isCreated) {
+            return new ResponseEntity<>("Failed to create teacher", HttpStatus.BAD_REQUEST);
+        }
+
+        return new ResponseEntity<>("Student created successfully", HttpStatus.CREATED);
+
     }
 
 

@@ -3,7 +3,6 @@ package ru.qq.database.postgres_db.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.HashSet;
 import java.util.Set;
 
 @Getter
@@ -14,7 +13,7 @@ import java.util.Set;
 @AllArgsConstructor
 @Entity
 @Table(name = "t_task_catalogs", schema = "oisac")
-public class TaskCatalog {
+public class TaskCatalogPostgres {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "c_catalog_id")
@@ -23,7 +22,7 @@ public class TaskCatalog {
     @Column(name = "c_catalog_name", nullable = false, unique = true)
     private String catalogName;
 
-    @OneToMany(mappedBy = "taskCatalog", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Task> tasks;
+    @OneToMany(mappedBy = "taskCatalogPostgres", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<TaskPostgres> taskPostgres;
 
 }

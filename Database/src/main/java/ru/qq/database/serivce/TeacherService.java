@@ -1,13 +1,12 @@
 package ru.qq.database.serivce;
 
-import org.springframework.http.ResponseEntity;
 import ru.qq.common.payload.TeacherPayload;
 import ru.qq.common.payload.TaskCatalogPayload;
 
-public interface MainService {
+public interface TeacherService {
     void saveTaskCatalog(String nameOfTeacher, TaskCatalogPayload catalogPayload);
 
-    boolean existsTeacher(String nameOfTeacher);
+    boolean existsTeacher(String nickname);
 
     void createTeacher(TeacherPayload teacherPayload);
 

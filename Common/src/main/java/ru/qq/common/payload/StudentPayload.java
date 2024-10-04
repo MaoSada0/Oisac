@@ -1,3 +1,3 @@
 package ru.qq.common.payload;
 
-public record StudentPayload(){}
+public record StudentPayload(String nickname){}

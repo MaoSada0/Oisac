@@ -1,31 +1,32 @@
 package ru.qq.node.webclient.impl;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.ClientResponse;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
+import ru.qq.common.payload.AddTaskCatalogToStudentPayload;
 import ru.qq.node.exception.ConflictFromDbException;
 import ru.qq.node.exception.NotFoundFromDbException;
-import ru.qq.node.webclient.TeacherStudentWebclient;
+import ru.qq.node.webclient.StudentOfTeacherWebClient;
 
 @Component
 @RequiredArgsConstructor
-public class TeacherStudentWebclientImpl implements TeacherStudentWebclient {
+@Log4j
+public class StudentOfTeacherWebClientImpl implements StudentOfTeacherWebClient {
 
     private final WebClient webClient;
 
     @Override
-    public boolean bindTeacherAndStudent(String teacherNickname, String studentNickname) {
-
+    public boolean addTasksToStudent(String teacherNickname, String studentNickname, AddTaskCatalogToStudentPayload payload) {
         return Boolean.TRUE.equals(webClient.post()
-                .uri((uriBuilder -> uriBuilder
-                        .path("/teachers-students/bind")
-                        .queryParam("teacherNickname", teacherNickname)
-                        .queryParam("studentNickname", studentNickname)
-                        .build()))
+                .uri("/teacher/{teacherNickname}/students/{studentNickname}/tasks/add",
+                        teacherNickname,
+                        studentNickname)
+                .bodyValue(payload)
                 .retrieve()
                 .onStatus(HttpStatusCode::is4xxClientError, clientResponse -> clientResponse.bodyToMono(String.class)
                         .flatMap(body -> handleClientResponse(clientResponse, body, teacherNickname, studentNickname)))
@@ -56,3 +57,5 @@ public class TeacherStudentWebclientImpl implements TeacherStudentWebclient {
         return "Err with: {" + teacherNickname + ", " + studentNickname + "}. Response body{" + body + "}";
     }
 }
+
+

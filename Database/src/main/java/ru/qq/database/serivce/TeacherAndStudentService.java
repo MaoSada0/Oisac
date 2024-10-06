@@ -1,7 +1,7 @@
 package ru.qq.database.serivce;
 
 
-public interface TeacherStudentService {
+public interface TeacherAndStudentService {
 
     void bindTeacherAndStudent(String teacherNickname, String studentNickname);
 

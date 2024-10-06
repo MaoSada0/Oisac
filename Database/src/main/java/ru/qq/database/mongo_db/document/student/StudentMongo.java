@@ -1,4 +1,4 @@
-package ru.qq.database.mongo_db.document;
+package ru.qq.database.mongo_db.document.student;
 
 import lombok.*;
 import org.springframework.data.annotation.Id;
@@ -18,6 +18,12 @@ public class StudentMongo {
     @Id
     private String nicknameOfStudent;
 
+    @Field("Fullname")
+    private String fullname;
+
     @Field("Task-catalogs")
-    private List<TaskCatalogMongo> taskCatalogs;
+    private List<TaskCatalogForStudentMongo> taskCatalogs;
+
+    @Field("Teacher")
+    private List<String> teacherIds;
 }

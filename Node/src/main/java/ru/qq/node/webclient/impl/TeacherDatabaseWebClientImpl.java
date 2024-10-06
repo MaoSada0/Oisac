@@ -22,7 +22,7 @@ public class TeacherDatabaseWebClientImpl implements TeacherDatabaseWebClient {
     @Override
     public boolean saveTasks(TaskCatalogPayload taskCatalogPayload, String nameOfTeacher) {
         return Boolean.TRUE.equals(webClient.post()
-                .uri("/teacher/{nickname}/upload", nameOfTeacher)
+                .uri("/teacher/{nickname}/tasks/upload", nameOfTeacher)
                 .bodyValue(taskCatalogPayload)
                 .retrieve()
                 .onStatus(HttpStatusCode::is4xxClientError, clientResponse -> clientResponse.bodyToMono(String.class)
@@ -48,8 +48,6 @@ public class TeacherDatabaseWebClientImpl implements TeacherDatabaseWebClient {
     @Override
     public boolean existsTeacher(String nameOfTeacher) {
 
-
-
         return Boolean.TRUE.equals(webClient.get()
                 .uri("/teacher/{nameOfTeacher}", nameOfTeacher)
                 .retrieve()
@@ -63,7 +61,7 @@ public class TeacherDatabaseWebClientImpl implements TeacherDatabaseWebClient {
     @Override
     public String[] getNamesOfTasks(String nameOfTeacher) {
         return webClient.get()
-                .uri("/teacher/{nameOfTeacher}/task/names", nameOfTeacher)
+                .uri("/teacher/{nameOfTeacher}/tasks/names", nameOfTeacher)
                 .retrieve()
                 .onStatus(HttpStatusCode::is4xxClientError, clientResponse -> clientResponse.bodyToMono(String.class)
                         .flatMap(body -> handleClientResponse(clientResponse, body, nameOfTeacher)))

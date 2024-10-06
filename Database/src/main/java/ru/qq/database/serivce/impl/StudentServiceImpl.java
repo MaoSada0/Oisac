@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.qq.common.payload.StudentPayload;
 import ru.qq.database.exception.student.StudentAlreadyExistsException;
-import ru.qq.database.mongo_db.document.StudentMongo;
+import ru.qq.database.mongo_db.document.student.StudentMongo;
 import ru.qq.database.mongo_db.repository.MongoStudentRepository;
 import ru.qq.database.postgres_db.entity.StudentPostgres;
 import ru.qq.database.postgres_db.repository.PostgresStudentRepository;
@@ -36,7 +36,9 @@ public class StudentServiceImpl implements StudentService {
 
         StudentMongo studentMongo = StudentMongo.builder()
                 .nicknameOfStudent(studentPayload.nickname())
+                .fullname("none")
                 .taskCatalogs(new ArrayList<>())
+                .teacherIds(new ArrayList<>())
                 .build();
 
         mongoStudentRepository.save(studentMongo);

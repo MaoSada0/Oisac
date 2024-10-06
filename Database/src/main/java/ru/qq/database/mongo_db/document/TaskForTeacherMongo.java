@@ -1,10 +1,9 @@
 package ru.qq.database.mongo_db.document;
 
+import org.springframework.data.annotation.Id;
 import lombok.*;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
-
-import java.util.List;
 
 @Document
 @Getter
@@ -12,11 +11,14 @@ import java.util.List;
 @EqualsAndHashCode
 @Builder
 @Data
-public class TaskCatalogMongo {
+public class TaskForTeacherMongo {
 
-    @Field("Name")
-    private String name;
+    @Id
+    private String Id;
 
-    @Field("Tasks")
-    private List<TaskMongo> tasks;
+    @Field("Description")
+    private String description;
+
+    @Field("Answer")
+    private String answer;
 }

@@ -1,4 +1,4 @@
-package ru.qq.database.controller;
+package ru.qq.database.controller.teacher;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -21,7 +21,7 @@ public class TeacherIdController {
         return teacherNickname;
     }
 
-    @PostMapping("upload")
+    @PostMapping("tasks/upload")
     public ResponseEntity<?> uploadTasks(@ModelAttribute("nickname") String nickname,
                                         @RequestBody TaskCatalogPayload catalogPayload){
         teacherService.saveTaskCatalog(nickname, catalogPayload);
@@ -31,7 +31,7 @@ public class TeacherIdController {
                 .body("Success save: {" + nickname + ", " + catalogPayload.name() + "}");
     }
 
-    @GetMapping("task/names")
+    @GetMapping("tasks/names")
     public ResponseEntity<String[]> getAllTaskCatalogNames(@ModelAttribute("nickname") String nickname){
         String[] returnAns = teacherService.getNamesOfTaskCatalogs(nickname);
 

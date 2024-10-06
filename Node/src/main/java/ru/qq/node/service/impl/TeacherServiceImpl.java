@@ -12,6 +12,7 @@ import ru.qq.common.payload.TeacherPayload;
 import ru.qq.common.payload.TaskCatalogPayload;
 import ru.qq.common.payload.TaskPayload;
 import ru.qq.node.exception.IncorrectExcelFileException;
+import ru.qq.node.exception.IncorrectTypeFileException;
 import ru.qq.node.service.TeacherService;
 import ru.qq.node.webclient.TeacherDatabaseWebClient;
 
@@ -26,10 +27,18 @@ public class TeacherServiceImpl implements TeacherService {
 
     private final TeacherDatabaseWebClient teacherDatabaseWebClient;
 
+    private final String NEW_EXCEL_CONTENT_TYPE = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+    private final String OLD_EXCEL_CONTENT_TYPE = "application/vnd.ms-excel";
+
     @Override
     public boolean processExcel(MultipartFile excelFile, String name, String idOfTeacher) {
 
+        if(!(excelFile.getContentType().equals(NEW_EXCEL_CONTENT_TYPE) ||
+                excelFile.getContentType().equals(OLD_EXCEL_CONTENT_TYPE)))
+            throw new IncorrectTypeFileException("Incorrect type, you must provide excel file");
+
         List<TaskPayload> tasksAndAnswers = new ArrayList<>();
+
         try (Workbook workbook = new XSSFWorkbook(excelFile.getInputStream())) {
             Sheet sheet = workbook.getSheetAt(0);
 

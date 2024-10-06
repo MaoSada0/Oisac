@@ -1,6 +1,7 @@
 package ru.qq.node.controller.Teacher;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,7 +12,8 @@ import ru.qq.node.service.TeacherService;
 @RestController
 @RequestMapping("api/v1/teacher/{nickname}")
 @RequiredArgsConstructor
-public class IdTeacherController {
+@Log4j
+public class TeacherIdController {
 
     private final TeacherService teacherService;
 
@@ -20,7 +22,7 @@ public class IdTeacherController {
         return teacherNickname;
     }
 
-    @PostMapping("upload")
+    @PostMapping("tasks/upload")
     public ResponseEntity<?> uploadTask(@ModelAttribute("nickname") String nickname,
                                         @RequestParam("file") MultipartFile file,
                                         @RequestParam("name") String name){

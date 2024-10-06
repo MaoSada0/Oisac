@@ -1,4 +1,4 @@
-package ru.qq.database.controller;
+package ru.qq.database.controller.teacher;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

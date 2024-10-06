@@ -4,7 +4,7 @@ import org.springframework.data.mongodb.repository.Aggregation;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 import org.springframework.stereotype.Repository;
-import ru.qq.database.mongo_db.document.StudentMongo;
+import ru.qq.database.mongo_db.document.student.StudentMongo;
 
 import java.util.List;
 
@@ -18,6 +18,6 @@ public interface MongoStudentRepository extends MongoRepository<StudentMongo, St
     })
     List<String> findTaskCatalogNamesByStudentId(String nameOfStudent);
 
-    @Query(value = "{ '_id': ?0, 'Task-catalogs.Name': ?1 }", exists = true)
-    boolean existsByIdAndTaskCatalogName(String studentId, String taskCatalogName);
+    @Query(value = "{ '_id': ?0, 'Task-catalogs._id': ?1 }", exists = true)
+    boolean existsByStudentIdAndTaskCatalogId(String studentId, String taskCatalogName);
 }

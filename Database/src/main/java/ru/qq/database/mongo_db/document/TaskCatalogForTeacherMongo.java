@@ -10,20 +10,17 @@ import java.util.List;
 @Document
 @Getter
 @Setter
-@Builder
 @EqualsAndHashCode
+@Builder
 @Data
-public class TeacherMongo {
+public class TaskCatalogForTeacherMongo {
 
     @Id
-    private String nicknameOfTeacher;
+    private String Id;
 
-    @Field("Fullname")
-    private String fullname;
+    @Field("Name")
+    private String name;
 
-    @Field("Task-catalogs")
-    private List<TaskCatalogForTeacherMongo> taskCatalogs;
-
-    @Field("Students")
-    private List<String> studentIds;
+    @Field("Tasks")
+    private List<TaskForTeacherMongo> tasks;
 }

@@ -6,8 +6,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.qq.common.payload.TeacherPayload;
 import ru.qq.common.payload.TaskCatalogPayload;
-import ru.qq.database.mongo_db.document.TaskMongo;
-import ru.qq.database.mongo_db.document.TaskCatalogMongo;
+import ru.qq.database.mongo_db.document.TaskForTeacherMongo;
+import ru.qq.database.mongo_db.document.TaskCatalogForTeacherMongo;
 import ru.qq.database.mongo_db.document.TeacherMongo;
 import ru.qq.database.exception.teacher.TaskCatalogWithNameAlreadyExistsException;
 import ru.qq.database.exception.teacher.TeacherAlreadyExistsException;
@@ -36,21 +36,22 @@ public class TeacherServiceImpl implements TeacherService {
         if(!postgresTeacherRepository.existsByTeacherNickname(nameOfTeacher))
             throw new TeacherNotFoundException("Teacher: {" + nameOfTeacher + "} not found in db");
 
-        if(mongoTeacherRepository.existsByIdAndTaskCatalogName(nameOfTeacher, catalogPayload.name()))
+        if(mongoTeacherRepository.existsByTeacherIdAndTaskCatalogId(nameOfTeacher, catalogPayload.name()))
             throw new TaskCatalogWithNameAlreadyExistsException("Task catalog: {" + catalogPayload.name() + "} already exists");
 
-        TeacherMongo teacherMongo = mongoTeacherRepository.findById(nameOfTeacher).get();
+        TeacherMongo teacherMongo = mongoTeacherRepository.findById(nameOfTeacher).orElseThrow();
 
-        List<TaskMongo> taskMongos = catalogPayload.tasks().stream()
-                .map(tp -> TaskMongo.builder()
+        List<TaskForTeacherMongo> taskForTeacherMongos = catalogPayload.tasks().stream()
+                .map(tp -> TaskForTeacherMongo.builder()
                         .description(tp.description())
                         .answer(tp.answer())
                         .build())
                 .collect(Collectors.toList());
 
-        TaskCatalogMongo newCatalog = TaskCatalogMongo.builder()
+        TaskCatalogForTeacherMongo newCatalog = TaskCatalogForTeacherMongo.builder()
+                .Id(catalogPayload.name())
                 .name(catalogPayload.name())
-                .tasks(taskMongos)
+                .tasks(taskForTeacherMongos)
                 .build();
 
         teacherMongo.getTaskCatalogs().add(newCatalog);
@@ -78,7 +79,9 @@ public class TeacherServiceImpl implements TeacherService {
 
         TeacherMongo teacherMongo = TeacherMongo.builder()
                             .nicknameOfTeacher(teacherPayload.nickname())
+                            .fullname("none")
                             .taskCatalogs(new ArrayList<>())
+                            .studentIds(new ArrayList<>())
                             .build();
 
 

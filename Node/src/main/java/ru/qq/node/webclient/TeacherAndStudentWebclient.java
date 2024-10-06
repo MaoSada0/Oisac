@@ -1,6 +1,5 @@
-package ru.qq.node.service;
+package ru.qq.node.webclient;
 
-public interface TeacherStudentService {
-
+public interface TeacherAndStudentWebclient {
     boolean bindTeacherAndStudent(String teacherNickname, String studentNickname);
 }

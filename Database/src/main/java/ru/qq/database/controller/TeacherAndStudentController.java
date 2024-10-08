@@ -3,10 +3,7 @@ package ru.qq.database.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ru.qq.database.serivce.TeacherAndStudentService;
 
 @RestController
@@ -16,7 +13,7 @@ public class TeacherAndStudentController {
 
     private final TeacherAndStudentService teacherAndStudentService;
 
-    @PostMapping("bind")
+    @PatchMapping("bind")
     public ResponseEntity<?> bindTeacherAndStudent(@RequestParam("teacherNickname") String teacherNickname,
                                                    @RequestParam("studentNickname") String studentNickname){
         teacherAndStudentService.bindTeacherAndStudent(teacherNickname, studentNickname);

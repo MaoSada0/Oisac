@@ -10,15 +10,15 @@ import org.springframework.web.bind.annotation.RestController;
 import ru.qq.node.service.TeacherService;
 
 @RestController
-@RequestMapping("api/v1/teacher/{teacherName}/task")
+@RequestMapping("api/v1/teacher/{teacherName}/tasks")
 @RequiredArgsConstructor
 public class TaskOfTeacherController {
 
     private final TeacherService teacherService;
 
     @GetMapping("names")
-    public ResponseEntity<String[]> getTasks(@PathVariable("teacherName") String id){
-        String[] returnAns = teacherService.getNamesOfTasks(id);
+    public ResponseEntity<String[]> getTasks(@PathVariable("teacherName") String teacherName){
+        String[] returnAns = teacherService.getNamesOfTasks(teacherName);
 
         return new ResponseEntity<>(returnAns, HttpStatus.OK);
     }

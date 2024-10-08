@@ -6,6 +6,8 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import ru.qq.common.payload.TeacherPayload;
@@ -31,7 +33,8 @@ public class TeacherServiceImpl implements TeacherService {
     private final String OLD_EXCEL_CONTENT_TYPE = "application/vnd.ms-excel";
 
     @Override
-    public boolean processExcel(MultipartFile excelFile, String name, String idOfTeacher) {
+    @CacheEvict(value = "namesOfTeacherTasks", allEntries = true)
+    public boolean processFile(MultipartFile excelFile, String name, String idOfTeacher) {
 
         if(!(excelFile.getContentType().equals(NEW_EXCEL_CONTENT_TYPE) ||
                 excelFile.getContentType().equals(OLD_EXCEL_CONTENT_TYPE)))
@@ -66,16 +69,22 @@ public class TeacherServiceImpl implements TeacherService {
     }
 
     @Override
+    @Cacheable(value = "existsTeacher", key = "#username", cacheManager = "cacheManager")
     public boolean existsTeacher(String username) {
-        boolean b = teacherDatabaseWebClient.existsTeacher(username);
+        return teacherDatabaseWebClient.existsTeacher(username);
+    }
 
-        log.debug(b);
-
-        return b;
+    private void testSimulateSlowService() {
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            throw new IllegalStateException(e);
+        }
     }
 
     @Override
-    public String[] getNamesOfTasks(String id) {
-        return teacherDatabaseWebClient.getNamesOfTasks(id);
+    @Cacheable(value = "namesOfTeacherTasks", key = "#teacherName", cacheManager = "cacheManager")
+    public String[] getNamesOfTasks(String teacherName) {
+        return teacherDatabaseWebClient.getNamesOfTasks(teacherName);
     }
 }

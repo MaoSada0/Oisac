@@ -1,6 +1,7 @@
 package ru.qq.node.controller.Student;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -9,7 +10,7 @@ import ru.qq.node.service.StudentService;
 @RestController
 @RequestMapping("api/v1/student/{nickname}")
 @RequiredArgsConstructor
-public class IdStudentController {
+public class StudentIdController {
 
     private final StudentService studentService;
 

@@ -26,7 +26,7 @@ public class TeacherIdController {
     public ResponseEntity<?> uploadTask(@ModelAttribute("nickname") String nickname,
                                         @RequestParam("file") MultipartFile file,
                                         @RequestParam("name") String name){
-        boolean isOk = teacherService.processExcel(file, name, nickname);
+        boolean isOk = teacherService.processFile(file, name, nickname);
 
         if (!isOk) {
             return new ResponseEntity<>("Failed to upload task", HttpStatus.BAD_REQUEST);

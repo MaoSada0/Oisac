@@ -1,0 +1,13 @@
+spring:
+  kafka:
+    consumer:
+      enable-auto-commit: false
+      auto-offset-reset: earliest
+    bootstrap-servers: localhost:9092
+    topic:
+      notification: NOTIFICATION_TOPIC
+    group-id:
+      from-node: FROM_NODE_GROUP_ID
+
+server:
+  port: 8082

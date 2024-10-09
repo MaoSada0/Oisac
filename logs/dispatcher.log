@@ -1,0 +1,46 @@
+2024-09-28 20:17:37 DEBUG MainServiceImpl:33 - true
+2024-09-28 20:19:44 DEBUG MainServiceImpl:78 - [{"_id": "qq", "Task-catalogs": [{"Name": "firstTaks"}, {"Name": "secondTasks"}]}]
+2024-09-28 20:20:53 DEBUG MainServiceImpl:1511 - {"_id": "qq", "Task-catalogs": [{"Name": "firstTaks"}, {"Name": "secondTasks"}]}
+2024-09-28 20:22:17 DEBUG MainServiceImpl:78 - 1
+2024-09-28 20:24:22 DEBUG MainServiceImpl:1511 - {"_id": "qq", "Task-catalogs": [{"Name": "firstTaks"}, {"Name": "secondTasks"}]}
+2024-09-28 20:32:17 DEBUG MainServiceImpl:1511 - {"_id": "qq", "Task-catalogs": [{"Name": "firstTaks"}, {"Name": "secondTasks"}]}
+2024-09-28 20:37:08 DEBUG MainServiceImpl:1511 - firstTaks
+2024-09-28 20:37:08 DEBUG MainServiceImpl:1511 - secondTasks
+2024-10-04 20:39:42 DEBUG TeacherServiceImpl:73 - false
+2024-10-04 21:07:57 DEBUG StudentServiceImpl:29 - false
+2024-10-04 21:10:15 DEBUG StudentServiceImpl:29 - false
+2024-10-04 21:12:20 DEBUG StudentServiceImpl:26 - true
+2024-10-04 22:24:05 DEBUG TeacherServiceImpl:34 - true
+2024-10-04 22:24:14 DEBUG TeacherServiceImpl:34 - true
+2024-10-04 22:31:47 DEBUG TeacherIdController:47 - true
+2024-10-04 22:33:21 DEBUG TeacherIdController:47 - true
+2024-10-04 22:33:21 DEBUG TeacherServiceImpl:63 - false
+2024-10-04 22:33:50 DEBUG TeacherIdController:47 - true
+2024-10-04 22:33:50 DEBUG TeacherServiceImpl:63 - false
+2024-10-04 22:35:05 DEBUG TeacherIdController:47 - true
+2024-10-04 22:35:05 DEBUG TeacherIdController:50 - there
+2024-10-04 22:35:05 DEBUG TeacherServiceImpl:63 - false
+2024-10-04 22:37:13 DEBUG TeacherIdController:47 - true
+2024-10-04 22:37:13 DEBUG TeacherServiceImpl:63 - true
+2024-10-04 22:37:16 DEBUG TeacherIdController:47 - false
+2024-10-05 10:35:35 DEBUG StudentServiceImpl:33 - false
+2024-10-05 10:35:51 DEBUG TeacherServiceImpl:34 - true
+2024-10-05 10:37:25 DEBUG TeacherServiceImpl:34 - application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+2024-10-05 10:37:26 DEBUG TeacherServiceImpl:34 - true
+2024-10-05 10:38:48 DEBUG TeacherServiceImpl:34 - test.xlsx
+2024-10-05 10:38:49 DEBUG TeacherServiceImpl:34 - true
+2024-10-06 16:30:47 DEBUG StudentServiceImpl:33 - false
+2024-10-06 16:38:44 DEBUG TeacherServiceImpl:34 - true
+2024-10-06 16:46:50 DEBUG TeacherServiceImpl:34 - true
+2024-10-06 16:49:42 DEBUG StudentServiceImpl:33 - false
+2024-10-06 16:50:00 DEBUG TeacherServiceImpl:34 - true
+2024-10-08 18:30:17 DEBUG TeacherIdController:47 - true
+2024-10-08 18:46:29 DEBUG TeacherIdController:47 - true
+2024-10-08 18:49:04 DEBUG TeacherIdController:47 - false
+2024-10-09 20:20:49 DEBUG StudentOfTeacherServiceImpl:45 - true
+2024-10-09 20:31:22 DEBUG StudentServiceImpl:33 - false
+2024-10-09 20:32:29 DEBUG TeacherServiceImpl:34 - true
+2024-10-09 20:41:06 DEBUG StudentServiceImpl:33 - false
+2024-10-09 20:41:25 DEBUG TeacherServiceImpl:34 - true
+2024-10-09 20:42:11 DEBUG MainKafkaListenerImpl:23 - Notification: qq and mao
+2024-10-09 20:59:46 DEBUG MainKafkaListenerImpl:27 - Notification: qq and mao

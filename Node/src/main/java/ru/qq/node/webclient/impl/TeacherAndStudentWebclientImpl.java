@@ -20,7 +20,7 @@ public class TeacherAndStudentWebclientImpl implements TeacherAndStudentWebclien
     @Override
     public boolean bindTeacherAndStudent(String teacherNickname, String studentNickname) {
 
-        return Boolean.TRUE.equals(webClient.post()
+        return Boolean.TRUE.equals(webClient.patch()
                 .uri((uriBuilder -> uriBuilder
                         .path("/teachers-students/bind")
                         .queryParam("teacherNickname", teacherNickname)

@@ -1,6 +1,7 @@
 package ru.qq.database.serivce.impl;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.qq.common.payload.AddTaskCatalogToStudentPayload;
@@ -22,6 +23,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
+@Log4j
 public class StudentOfTeacherServiceImpl implements StudentOfTeacherService {
 
     private final MongoTeacherRepository mongoTeacherRepository;
@@ -39,6 +41,9 @@ public class StudentOfTeacherServiceImpl implements StudentOfTeacherService {
 
         if(!mongoTeacherRepository.existsById(teacherNickname))
             throw new TeacherNotFoundException(teacherNickname + " not found in db");
+
+        // TODO: СДЕЛАТЬ ПРОВЕРКУ НА BIND
+        // TODO: СДЕЛАТЬ ПРОВЕРКУ НА УЖЕ ДОБАЛЕННЫЙ КАТАЛОГ
 
         if(!mongoTeacherRepository.existsByTeacherIdAndTaskCatalogId(teacherNickname, payload.nameOfTaskCatalog()))
             throw new NoSuchTaskCatalogException(payload.nameOfTaskCatalog() + " not found");

@@ -14,3 +14,13 @@ spring:
     redis:
       port: 6379
       host: localhost
+
+  kafka:
+    producer:
+      acks: all
+      retries: 3
+    bootstrap-servers: localhost:9092
+    topic:
+      notification: NOTIFICATION_TOPIC
+    group-id:
+      from-node: FROM_NODE_GROUP_ID
